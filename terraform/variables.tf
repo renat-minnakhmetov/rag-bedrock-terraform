@@ -15,3 +15,15 @@ variable "environment" {
   type        = string
   default     = "dev"
 }
+
+variable "state_bucket_name" {
+  description = "S3 bucket for Terraform state."
+  type        = string
+  default     = null
+}
+
+variable "state_lock_table_name" {
+  description = "DynamoDB table for Terraform state locking."
+  type        = string
+  default     = null
+}
