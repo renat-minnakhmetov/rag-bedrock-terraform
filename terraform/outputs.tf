@@ -22,3 +22,13 @@ output "terraform_backend_config" {
     }
   EOT
 }
+
+output "bedrock_kb_role_arn" {
+  description = "IAM role ARN for Amazon Bedrock Knowledge Base"
+  value       = aws_iam_role.bedrock_kb.arn
+}
+
+output "bedrock_kb_role_name" {
+  description = "IAM role name"
+  value       = aws_iam_role.bedrock_kb.name
+}
