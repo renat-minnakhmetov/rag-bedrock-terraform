@@ -21,3 +21,9 @@ variable "state_bucket_name" {
   type        = string
   default     = null
 }
+
+variable "embedding_model_id" {
+  description = "Amazon Titan embedding model ID"
+  type        = string
+  default     = "amazon.titan-embed-text-v2:0"
+}
