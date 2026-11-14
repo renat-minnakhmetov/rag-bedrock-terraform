@@ -145,10 +145,13 @@ resource "opensearch_index" "vector" {
   mappings = jsonencode({
     properties = {
       (local.vector_field) = {
-        type      = "knn_vector"
-        dimension = local.vector_dimension
+        type              = "knn_vector"
+        dimension         = local.vector_dimension
+        mode              = "on_disk"
+        compression_level = "32x"
         method = {
           name       = "hnsw"
+          engine     = "faiss"
           space_type = "l2"
           parameters = {
             m               = 16
@@ -157,8 +160,7 @@ resource "opensearch_index" "vector" {
         }
       }
       (local.text_field) = {
-        type  = "text"
-        index = true
+        type = "text"
       }
       (local.metadata_field) = {
         type  = "text"
