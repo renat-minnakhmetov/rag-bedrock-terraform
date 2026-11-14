@@ -32,3 +32,27 @@ output "bedrock_kb_role_name" {
   description = "IAM role name"
   value       = aws_iam_role.bedrock_kb.name
 }
+
+output "opensearch_collection_arn" {
+  value = aws_opensearchserverless_collection.kb.arn
+}
+
+output "opensearch_collection_id" {
+  value = aws_opensearchserverless_collection.kb.id
+}
+
+output "opensearch_collection_endpoint" {
+  value = aws_opensearchserverless_collection.kb.collection_endpoint
+}
+
+output "opensearch_dashboard_endpoint" {
+  value = try(aws_opensearchserverless_collection.kb.dashboard_endpoint, null)
+}
+
+output "vector_index_name" {
+  value = local.index_name
+}
+
+output "collection_group_name" {
+  value = aws_opensearchserverless_collection_group.kb.name
+}

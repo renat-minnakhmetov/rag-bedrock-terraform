@@ -96,3 +96,25 @@ resource "aws_iam_role_policy_attachment" "bedrock_model" {
   role       = aws_iam_role.bedrock_kb.name
   policy_arn = aws_iam_policy.bedrock_model.arn
 }
+
+
+# OpenSearch Serverless permissions
+
+data "aws_iam_policy_document" "opensearch" {
+  statement {
+    sid       = "OpenSearchServerlessAccess"
+    effect    = "Allow"
+    actions   = ["aoss:APIAccessAll"]
+    resources = [aws_opensearchserverless_collection.kb.arn]
+  }
+}
+
+resource "aws_iam_policy" "opensearch" {
+  name   = "rag-bedrock-dev-opensearch"
+  policy = data.aws_iam_policy_document.opensearch.json
+}
+
+resource "aws_iam_role_policy_attachment" "opensearch" {
+  role       = aws_iam_role.bedrock_kb.name
+  policy_arn = aws_iam_policy.opensearch.arn
+}
